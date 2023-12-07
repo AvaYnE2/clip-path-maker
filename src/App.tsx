@@ -112,7 +112,7 @@ function App() {
         setWindowSize={setWindowSize}
         setPoints={setPoints}
       />
-      <div className="isolate flex justify-center items-center z-10">
+      <div className="isolate z-10 flex items-center justify-center ">
         <div className="">
           {points.length < 3 && (
             <p className="text-center mt-4">
@@ -120,7 +120,7 @@ function App() {
             </p>
           )}
           <div
-            className="relative border border-black bg-slate-200 dark:bg-slate-900/30 rounded-lg"
+            className="relative border bg-slate-200 dark:bg-slate-900/30 rounded-lg"
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             onMouseLeave={stopDragging}
@@ -128,7 +128,10 @@ function App() {
             style={{ width: windowSize.width, height: windowSize.height }}
           >
             <div
-              className={cn(color, "absolute top-0 left-0 w-full h-full")}
+              className={cn(
+                color,
+                "absolute top-0 left-0 w-full h-full rounded-lg border",
+              )}
               style={{ clipPath: polygon }}
             ></div>
             <div
@@ -152,53 +155,10 @@ function App() {
               ))}
             </div>
           </div>
-
-          {/*<div className="flex items-stretch gap-2">
-            <Button onClick={() => setPoints([])}>Reset</Button>
-            <div className="flex gap-2 items-stretch">
-              <InputWithLabel
-                label="Width"
-                type="number"
-                placeholder="Width"
-                className="w-24"
-                value={newSize.width}
-                onChange={(e) =>
-                  setNewSize((prev) => ({
-                    ...prev,
-                    width: parseInt(e.target.value),
-                  }))
-                }
-              />
-              <InputWithLabel
-                label="Height"
-                type="number"
-                placeholder="Height"
-                className="w-24"
-                value={newSize.height}
-                onChange={(e) =>
-                  setNewSize((prev) => ({
-                    ...prev,
-                    height: parseInt(e.target.value),
-                  }))
-                }
-              />
-              <Button onClick={() => setWindowSize(newSize)}>Set Size</Button>
-            </div>
-            <div>
-              Color selector
-              <div className="flex gap-2">
-                {colors.map((color) => (
-                  <div
-                    key={color}
-                    className={`w-8 h-8 rounded-full ${color} cursor-pointer`}
-                    onClick={() => setColor(color)}
-                  ></div>
-                ))}
-              </div>
-            </div>
-          </div>*/}
-          {/*<strong>Clip Path:</strong>*/}
-          <div className="inline-block bg-slate-800/30 p-8 relative w-1/2 overflow-auto rounded-lg">
+          <div
+            className="inline-block bg-slate-800/30 p-8 relative overflow-auto rounded-lg"
+            style={{ width: windowSize.width }}
+          >
             <Button
               size="sm"
               variant="ghost"
