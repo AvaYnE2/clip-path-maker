@@ -120,7 +120,7 @@ function App() {
             </p>
           )}
           <div
-            className="relative border border-black bg-slate-200 rounded-lg"
+            className="relative border border-black bg-slate-200 dark:bg-slate-900/30 rounded-lg"
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             onMouseLeave={stopDragging}
