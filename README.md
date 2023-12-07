@@ -1,30 +1,58 @@
-# React + TypeScript + Vite
+# Clip Path Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web-based Clip Path Maker tool, designed to provide an intuitive and interactive way for users to
+create custom clip paths. Built with Vite and React, this tool allows users to generate and modify clip paths easily,
+offering a seamless experience for both web developers and designers.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Design**: Users can add points on a canvas to create custom clip paths.
+- **Drag-and-Drop Functionality**: Points can be dragged and repositioned to refine the clip path.
+- **Color Customization**: Users can change the background color of the clip path area.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+These instructions will get you a copy of the project up and running on your local machine for development and testing
+purposes.
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+What you need to install the software:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Node.js
+- npm or yarn
+
+### Installing
+
+A step by step series of examples that tell you how to get a development environment running:
+
+1. Clone the repository:
+   ```bash
+   git clone https://https://github.com/AvaYnE2/clip-path-maker
+    ```
+2. Navigate to the project directory:
+   ```bash
+    cd clip-path-maker
+    ```
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
+4. Run the development server:
+    ```bash
+    npm run dev
+    ```
+5. Open the project in your browser:
+    ```bash
+    http://localhost:5173/
+    ```
+
+## Built With
+
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+- [shadcn/ui](https://ui.shadcn.com/) - A component library for React
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
