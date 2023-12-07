@@ -21,14 +21,14 @@ const Sidebar: React.FC<Props> = ({
   colors,
   newSize,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>
       {isOpen ? (
         <div className="absolute top-1/3 left-0 h-1/3 z-50 shadow">
           <div className="ml-2 w-64 h-full dark:bg-slate-800 bg-slate-300 rounded-lg">
-            <div className="flex flex-col gap-2 h-full justify-between p-3 border rounded-lg">
+            <div className="flex flex-col gap-2 h-full justify-between p-2.5 border rounded-lg">
               <h2 className="text-xl font-bold">Controls</h2>
               <div className="space-y-2">
                 <div className="flex gap-2 items-stretch">

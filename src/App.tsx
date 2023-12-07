@@ -8,6 +8,7 @@ import { CopyIcon } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import { Toaster } from "@/components/ui/toaster.tsx";
 import { useToast } from "@/components/ui/use-toast.ts";
+import Footer from "@/layout/footer.tsx";
 
 export interface Point {
   x: number;
@@ -93,7 +94,8 @@ function App() {
   const { toast } = useToast();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(polygonShow).then((r) => console.log(r));
+    const poly = `clipPath: ${polygonShow}`;
+    navigator.clipboard.writeText(poly).then((r) => console.log(r));
     toast({
       title: "Copied to clipboard",
       description: "The clip path has been copied to your clipboard.",
@@ -112,7 +114,7 @@ function App() {
         setWindowSize={setWindowSize}
         setPoints={setPoints}
       />
-      <div className="isolate z-10 flex items-center justify-center ">
+      <div className="z-10 isolate flex items-center justify-center h-[85dvh]">
         <div className="">
           {points.length < 3 && (
             <p className="text-center mt-4">
@@ -168,13 +170,18 @@ function App() {
               <CopyIcon className="w-4 h-4" />
             </Button>
             {points.length < 3 ? (
-              <code className="block whitespace-pre-wrap">polygon()</code>
+              <code className="block whitespace-pre-wrap">
+                clipPath: polygon()
+              </code>
             ) : (
-              <code className="block whitespace-pre-wrap">{polygonShow}</code>
+              <code className="block whitespace-pre-wrap">
+                clipPath: {polygonShow}
+              </code>
             )}
           </div>
         </div>
       </div>
+      <Footer />
     </ThemeProvider>
   );
 }
