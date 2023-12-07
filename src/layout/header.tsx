@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         <div className="flex lg:flex-1 items-center">
           <a href="/" className="-m-1.5 p-1.5">
             <img
-              src="/logo2.png"
+              src="/logo.png"
               alt="logo"
               className=""
               width={64}
