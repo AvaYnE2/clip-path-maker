@@ -8,7 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 const InputWithLabel: React.FC<Props> = ({ label, ...props }) => {
   const id = useId();
   return (
-    <div className="grid w-full max-w-sm items-center">
+    <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor={id}>{label}</Label>
       <Input {...props} id={id} />
     </div>

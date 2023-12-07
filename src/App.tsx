@@ -1,17 +1,20 @@
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import React, { useCallback, useState } from "react";
 import { cn } from "@/lib/utils.ts";
-import { Button } from "@/components/ui/button.tsx";
-import InputWithLabel from "@/components/input-with-label.tsx";
 import { convertToPercent } from "@/utils/utils.ts";
 import Header from "@/layout/header.tsx";
+import Sidebar from "@/layout/sidebar.tsx";
+import { CopyIcon } from "lucide-react";
+import { Button } from "@/components/ui/button.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx";
+import { useToast } from "@/components/ui/use-toast.ts";
 
-interface Point {
+export interface Point {
   x: number;
   y: number;
 }
 
-interface Size {
+export interface Size {
   width: number;
   height: number;
 }
@@ -25,6 +28,7 @@ const colors: string[] = [
   "bg-purple-500",
   "bg-indigo-500",
 ];
+
 function App() {
   const [points, setPoints] = useState<Point[]>([]);
   const [draggingPoint, setDraggingPoint] = useState<number | null>(null);
@@ -86,13 +90,37 @@ function App() {
           .join(", ")})`
       : "none";
 
+  const { toast } = useToast();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(polygonShow).then((r) => console.log(r));
+    toast({
+      title: "Copied to clipboard",
+      description: "The clip path has been copied to your clipboard.",
+    });
+  };
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Toaster />
       <Header />
-      <div className="w-screen h-screen flex justify-center items-center">
+      <Sidebar
+        colors={colors}
+        newSize={newSize}
+        setNewSize={setNewSize}
+        setColor={setColor}
+        setWindowSize={setWindowSize}
+        setPoints={setPoints}
+      />
+      <div className="isolate flex justify-center items-center z-10">
         <div className="">
+          {points.length < 3 && (
+            <p className="text-center mt-4">
+              Click at least 3 points to create a polygon
+            </p>
+          )}
           <div
-            className="relative border border-black"
+            className="relative border border-black bg-slate-200 rounded-lg"
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             onMouseLeave={stopDragging}
@@ -124,12 +152,8 @@ function App() {
               ))}
             </div>
           </div>
-          {points.length < 3 && (
-            <p className="text-center mt-4">
-              Click at least 3 points to create a polygon
-            </p>
-          )}
-          <div className="flex items-stretch gap-2">
+
+          {/*<div className="flex items-stretch gap-2">
             <Button onClick={() => setPoints([])}>Reset</Button>
             <div className="flex gap-2 items-stretch">
               <InputWithLabel
@@ -172,10 +196,23 @@ function App() {
                 ))}
               </div>
             </div>
+          </div>*/}
+          {/*<strong>Clip Path:</strong>*/}
+          <div className="inline-block bg-slate-800/30 p-8 relative w-1/2 overflow-auto rounded-lg">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="absolute top-0 right-0 p-2"
+              onClick={handleCopy}
+            >
+              <CopyIcon className="w-4 h-4" />
+            </Button>
+            {points.length < 3 ? (
+              <code className="block whitespace-pre-wrap">polygon()</code>
+            ) : (
+              <code className="block whitespace-pre-wrap">{polygonShow}</code>
+            )}
           </div>
-          <p>
-            <strong>Clip Path:</strong> {polygonShow}
-          </p>
         </div>
       </div>
     </ThemeProvider>

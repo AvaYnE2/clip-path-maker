@@ -1,3 +1,3 @@
 export const convertToPercent = (value: number, size: number) => {
-  return Math.floor((value / size) * 100);
+  return Number(((value / size) * 100).toFixed(1));
 };
