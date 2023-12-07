@@ -1,6 +1,10 @@
+import { ThemeProvider } from "@/components/theme-provider.tsx";
 import React, { useCallback, useState } from "react";
-import { convertToPercent } from "./utils/utils.ts";
 import { cn } from "@/lib/utils.ts";
+import { Button } from "@/components/ui/button.tsx";
+import InputWithLabel from "@/components/input-with-label.tsx";
+import { convertToPercent } from "@/utils/utils.ts";
+import Header from "@/layout/header.tsx";
 
 interface Point {
   x: number;
@@ -21,7 +25,6 @@ const colors: string[] = [
   "bg-purple-500",
   "bg-indigo-500",
 ];
-
 function App() {
   const [points, setPoints] = useState<Point[]>([]);
   const [draggingPoint, setDraggingPoint] = useState<number | null>(null);
@@ -30,7 +33,7 @@ function App() {
     height: 500,
   });
   const [newSize, setNewSize] = useState<Size>(windowSize);
-  const [color, setColor] = useState<string>("bg-red-500");
+  const [color, setColor] = useState<string>("bg-green-500");
 
   const addPoint = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.target === e.currentTarget) {
@@ -84,7 +87,8 @@ function App() {
       : "none";
 
   return (
-    <div className="App">
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Header />
       <div className="w-screen h-screen flex justify-center items-center">
         <div className="">
           <div
@@ -106,7 +110,7 @@ function App() {
               {points.map((point, index) => (
                 <div
                   key={index}
-                  className="absolute w-6 h-6 bg-black rounded-full cursor-pointer"
+                  className="absolute w-6 h-6 bg-slate-600 rounded-full cursor-pointer"
                   style={{
                     left: `${point.x - 12}px`,
                     top: `${point.y - 12}px`,
@@ -125,13 +129,14 @@ function App() {
               Click at least 3 points to create a polygon
             </p>
           )}
-          <div className="flex gap-2 h-32">
-            <button onClick={() => setPoints([])}>Reset</button>
-            <div className="flex flex-col gap-1">
-              <p>Width:</p>
-              <input
+          <div className="flex items-stretch gap-2">
+            <Button onClick={() => setPoints([])}>Reset</Button>
+            <div className="flex gap-2 items-stretch">
+              <InputWithLabel
+                label="Width"
                 type="number"
-                className="w-24 h-full"
+                placeholder="Width"
+                className="w-24"
                 value={newSize.width}
                 onChange={(e) =>
                   setNewSize((prev) => ({
@@ -140,12 +145,11 @@ function App() {
                   }))
                 }
               />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p>Height:</p>
-              <input
+              <InputWithLabel
+                label="Height"
                 type="number"
-                className="w-24 h-full"
+                placeholder="Height"
+                className="w-24"
                 value={newSize.height}
                 onChange={(e) =>
                   setNewSize((prev) => ({
@@ -154,8 +158,8 @@ function App() {
                   }))
                 }
               />
+              <Button onClick={() => setWindowSize(newSize)}>Set Size</Button>
             </div>
-            <button onClick={() => setWindowSize(newSize)}>Set Size</button>
             <div>
               Color selector
               <div className="flex gap-2">
@@ -174,7 +178,7 @@ function App() {
           </p>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 
