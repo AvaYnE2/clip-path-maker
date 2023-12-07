@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
       <nav className="sm:ml-auto flex gap-4 sm:gap-6">
         <a
           className="bg-black p-2 shadow-xl rounded-full"
-          href=""
+          href="https://github.com/AvaYnE2/clip-path-maker"
           target="_blank"
           rel="noopener noreferrer"
         >
